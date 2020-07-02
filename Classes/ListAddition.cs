@@ -21,10 +21,10 @@ namespace DailyCode.classes
             sumTotal = new List<int>();
         }
 
-        private bool HasListValue(int value, List<int> intValues) 
+        private bool HasListValue(int value, List<int> intValues)
             => intValues?.Where(x => x == value).Count() > 0;
-        public bool CanItBeSum(int value, List<int> intValues) 
-            => HasListValue(value, intValues) ? true : test(value, intValues?.OrderByDescending( x => x).ToList());
+        public bool CanItBeSum(int value, List<int> intValues)
+            => HasListValue(value, intValues) ? true : test(value, intValues?.OrderByDescending(x => x).ToList());
 
         public bool test(int lookingForValue, List<int> initValues)
         {
@@ -34,30 +34,29 @@ namespace DailyCode.classes
             foreach (var currentValue in initValues)
             {
                 internalList.RemoveAt(0);
-                var sublist = new List<int>(); 
+                var sublist = new List<int>();
                 internalList.ForEach(x => sublist.Add(x + currentValue));
                 sumTotal.AddRange(sublist);
-                SumEvaluation(lookingForValue, internalList, sublist);
+                SumEvaluation(internalList, sublist);
             }
-            return false;
+            return sumTotal.Where(x => x == lookingForValue).Count() > 0;
         }
 
-        public bool SumEvaluation(int lookingforValue, List<int> vectorList, List<int> sublist)
+        public void SumEvaluation(List<int> vectorList, List<int> sublist)
         {
             var internalVectorList = new List<int>();
             internalVectorList.AddRange(vectorList);
             foreach (var currentValue in sublist)
             {
-                    internalVectorList?.RemoveAt(0);
-                    var internalSubList = new List<int>(); 
-                    internalVectorList.ForEach(x => internalSubList.Add(x + currentValue));
-                    sumTotal.AddRange(internalSubList);
-                    if(internalVectorList.Count > 0)
-                    {
-                        SumEvaluation(lookingforValue, internalVectorList, internalSubList);
-                    }
+                internalVectorList?.RemoveAt(0);
+                var internalSubList = new List<int>();
+                internalVectorList.ForEach(x => internalSubList.Add(x + currentValue));
+                sumTotal.AddRange(internalSubList);
+                if (internalVectorList.Count > 0)
+                {
+                    SumEvaluation(internalVectorList, internalSubList);
+                }
             }
-            return false;
         }
 
     }

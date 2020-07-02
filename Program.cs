@@ -8,11 +8,11 @@ namespace DailyCode
     {
         static void Main(string[] args)
         {
-            var multi = new Multiplicar(new List<int>{3,2,1});
+            var multi = new Multiplicar(new List<int> { 3, 2, 1 });
             Console.WriteLine(multi.ToString());
 
             var addition = new ListAddition();
-            Console.WriteLine($"The value can be sum:{addition.CanItBeSum(20, new List<int>{10, 15, 3, 7})}");
+            Console.WriteLine($"The value can be sum:{addition.CanItBeSum(25, new List<int> { 10, 15, 3, 7 })}");
 
         }
     }
